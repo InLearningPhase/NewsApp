@@ -12,7 +12,11 @@ class NewsListAdapter(private val items: ArrayList<String>, private val listener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
-        return NewsViewHolder(view)
+        val viewHolder = NewsViewHolder(view)
+        view.setOnClickListener {
+            listener.onItemClicked(items[viewHolder.adapterPosition])
+        }
+        return viewHolder
     }
 
     override fun getItemCount(): Int {
@@ -23,7 +27,6 @@ class NewsListAdapter(private val items: ArrayList<String>, private val listener
 
         val currentItem = items[position]
         holder.titleView.text = currentItem
-        holder.itemView.setOnClickListener { listener.onItemClicked(currentItem) }
 
     }
 }
